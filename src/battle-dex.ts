@@ -638,15 +638,22 @@ const Dex = new class implements ModdedDex {
 		} else {
 			// There is no entry or enough data in pokedex-mini.js
 			// Handle these in case-by-case basis; either using BW sprites or matching the played gen.
-			dir = (baseDir || 'gen5') + dir;
+			//dir = (baseDir || 'gen5') + dir;
 
 			// Gender differences don't exist prior to Gen 4,
 			// so there are no sprites for it
-			if (spriteData.gen >= 4 && miscData['frontf'] && options.gender === 'F') {
-				name += '-f';
-			}
+			//if (spriteData.gen >= 4 && miscData['frontf'] && options.gender === 'F') {
+			//	name += '-f';
+			//}
 
-			spriteData.url += dir + '/' + name + '.png';
+      //if (miscData.num < -1000 && miscData.num > -5000)
+      //{
+        spriteData.url = 'sprites/idol/' + name + dir + '.png';
+      //}
+      //else
+      //{
+      //  spriteData.url += dir + '/' + name + '.png';
+      //}
 		}
 
 		if (!options.noScale) {
@@ -684,6 +691,7 @@ const Dex = new class implements ModdedDex {
 		} else if (window.BattlePokedex?.[id]?.num) {
 			num = BattlePokedex[id].num;
 		}
+    if (num < -1000) return num;
 		if (num < 0) num = 0;
 		if (num > 1010) num = 0;
 
@@ -728,10 +736,21 @@ const Dex = new class implements ModdedDex {
 		}
 		let num = this.getPokemonIconNum(id, pokemon?.gender === 'F', facingLeft);
 
-		let top = Math.floor(num / 12) * 30;
-		let left = (num % 12) * 40;
-		let fainted = ((pokemon as Pokemon | ServerPokemon)?.fainted ? `;opacity:.3;filter:grayscale(100%) brightness(.5)` : ``);
-		return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png?v13) no-repeat scroll -${left}px -${top}px${fainted}`;
+    if (num < 0)
+    {
+      num = (num*-1) -1000;
+      let top = Math.floor(num / 12) * 30;
+  		let left = (num % 12) * 40;
+  		let fainted = ((pokemon as Pokemon | ServerPokemon)?.fainted ? `;opacity:.3;filter:grayscale(100%) brightness(.5)` : ``);
+  		return `background:transparent url(sprites/idolicons.png) no-repeat scroll -${left}px -${top}px${fainted}`;
+    }
+    else
+    {
+      let top = Math.floor(num / 12) * 30;
+  		let left = (num % 12) * 40;
+  		let fainted = ((pokemon as Pokemon | ServerPokemon)?.fainted ? `;opacity:.3;filter:grayscale(100%) brightness(.5)` : ``);
+  		return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png?v13) no-repeat scroll -${left}px -${top}px${fainted}`;
+    }
 	}
 
 	getTeambuilderSpriteData(pokemon: any, gen: number = 0): TeambuilderSpriteData {
@@ -785,7 +804,7 @@ const Dex = new class implements ModdedDex {
 		if (!pokemon) return '';
 		const data = this.getTeambuilderSpriteData(pokemon, gen);
 		const shiny = (data.shiny ? '-shiny' : '');
-		return 'background-image:url(' + Dex.resourcePrefix + data.spriteDir + shiny + '/' + data.spriteid + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-repeat:no-repeat';
+    return 'background-image:url(sprites/idol/' + data.spriteid + shiny + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-repeat:no-repeat';
 	}
 
 	getItemIcon(item: any) {

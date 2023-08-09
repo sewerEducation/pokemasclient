@@ -1156,7 +1156,7 @@
 					buf += '<li><button name="import" class="button big"><i class="fa fa-upload"></i> Import from text or URL</button></li>';
 				}
 				if (i < this.curTeam.capacity) {
-					buf += '<li><button name="addPokemon" class="button big"><i class="fa fa-plus"></i> Add Pok&eacute;mon</button></li>';
+					buf += '<li><button name="addPokemon" class="button big"><i class="fa fa-plus"></i> Add Idol</button></li>';
 				}
 				buf += '</ol>';
 				buf += '<form id="pokepasteForm" style="display:inline" method="post" action="https://pokepast.es/create" target="_blank">';
@@ -1209,13 +1209,13 @@
 			buf += '<div class="setcell setcell-details"><label>Details</label><button class="textbox setdetails" tabindex="-1" name="details">';
 
 			var GenderChart = {
-				'M': 'Male',
-				'F': 'Female',
-				'N': '&mdash;'
+				'M': 'Cool',
+				'F': 'Cute',
+				'N': 'Passion'
 			};
 			buf += '<span class="detailcell detailcell-first"><label>Level</label>' + (set.level || 100) + '</span>';
 			if (this.curTeam.gen > 1) {
-				buf += '<span class="detailcell"><label>Gender</label>' + GenderChart[set.gender || species.gender || 'N'] + '</span>';
+				buf += '<span class="detailcell"><label>Idol Style</label>' + GenderChart[set.gender || species.gender || 'N'] + '</span>';
 				if (isLetsGo) {
 					buf += '<span class="detailcell"><label>Happiness</label>' + (typeof set.happiness === 'number' ? set.happiness : 70) + '</span>';
 				} else if (this.curTeam.gen < 8 || isNatDex) {
@@ -1830,7 +1830,7 @@
 				var set = this.curSetList[i];
 				var pokemonicon = '<span class="picon pokemonicon-' + i + '" style="' + Dex.getPokemonIcon(set) + '"></span>';
 				if (!set.species) {
-					buf += '<button disabled="disabled" class="addpokemon" aria-label="Add Pok&eacute;mon"><i class="fa fa-plus"></i></button> ';
+					buf += '<button disabled="disabled" class="addpokemon" aria-label="Add Idol"><i class="fa fa-plus"></i></button> ';
 					isAdd = true;
 				} else if (i == this.curSetLoc) {
 					buf += '<button disabled="disabled" class="pokemon">' + pokemonicon + BattleLog.escapeHTML(set.name || this.curTeam.dex.species.get(set.species).baseSpecies || '<i class="fa fa-plus"></i>') + '</button> ';
@@ -2617,9 +2617,9 @@
 			buf += '<div class="formrow"><label class="formlabel">Level:</label><div><input type="number" min="1" max="100" step="1" name="level" value="' + (typeof set.level === 'number' ? set.level : 100) + '" class="textbox inputform numform" /></div></div>';
 
 			if (this.curTeam.gen > 1) {
-				buf += '<div class="formrow"><label class="formlabel">Gender:</label><div>';
+				buf += '<div class="formrow"><label class="formlabel">Idol Style:</label><div>';
 				if (species.gender && !isHackmons) {
-					var genderTable = {'M': "Male", 'F': "Female", 'N': "Genderless"};
+					var genderTable = {'M': "Cool", 'F': "Cute", 'N': "Passion"};
 					buf += genderTable[species.gender];
 				} else {
 					buf += '<label><input type="radio" name="gender" value="M"' + (set.gender === 'M' ? ' checked' : '') + ' /> Male</label> ';
@@ -2777,13 +2777,13 @@
 			// update details cell
 			var buf = '';
 			var GenderChart = {
-				'M': 'Male',
-				'F': 'Female',
-				'N': '&mdash;'
+				'M': 'Cool',
+				'F': 'Cute',
+				'N': 'Passion'
 			};
 			buf += '<span class="detailcell detailcell-first"><label>Level</label>' + (set.level || 100) + '</span>';
 			if (this.curTeam.gen > 1) {
-				buf += '<span class="detailcell"><label>Gender</label>' + GenderChart[set.gender || 'N'] + '</span>';
+				buf += '<span class="detailcell"><label>Idol Style</label>' + GenderChart[set.gender || 'N'] + '</span>';
 				if (isLetsGo) {
 					buf += '<span class="detailcell"><label>Happiness</label>70</span>';
 				} else {

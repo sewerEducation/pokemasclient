@@ -785,8 +785,12 @@ class BattleTooltips {
 		let genderBuf = '';
 		const gender = pokemon.gender;
 		if (gender === 'M' || gender === 'F') {
-			genderBuf = ` <img src="${Dex.fxPrefix}gender-${gender.toLowerCase()}.png" alt="${gender}" width="7" height="10" class="pixelated" /> `;
+			genderBuf = ` <img src="sprites/gender-${gender.toLowerCase()}.png" alt="${gender}" width="16" height="16" class="pixelated" /> `;
 		}
+    else
+    {
+      genderBuf = ` <img src="sprites/gender-n.png" alt="N" width="16" height="16" class="pixelated" /> `;
+    }
 
 		let name = BattleLog.escapeHTML(pokemon.name);
 		if (pokemon.speciesForme !== pokemon.name) {
