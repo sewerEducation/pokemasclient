@@ -419,6 +419,8 @@ class DexSearch {
 				}
 			}
 
+      if ((id in illegal)) continue;
+
 			// don't match duplicate aliases
 			let curBufLength = (passType === 'alias' && bufs[typeIndex].length);
 			if (curBufLength && bufs[typeIndex][curBufLength - 1][1] === id) continue;
@@ -500,7 +502,8 @@ class DexSearch {
 				break;
 			}
 		}
-		return [...buf, ...illegalBuf];
+		//return [...buf, ...illegalBuf];
+    return [...buf];
 	}
 
 	static getClosest(query: string) {
@@ -715,7 +718,7 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			results = [this.sortRow, ...results];
 		}
 		if (illegalResults && illegalResults.length) {
-			results = [...results, ['header', "Illegal results"], ...illegalResults];
+			//results = [...results, ['header', "Illegal results"], ...illegalResults];
 		}
 		return results;
 	}

@@ -346,17 +346,17 @@
 			var filterFolder;
 
 			if (!this.curFolder) {
-				buf += '<h2>Hi</h2>';
-				buf += '<p>Did you have a good day?</p>';
-				buf += '<p><button class="button" name="greeting" value="Y"><i class="fa fa-smile-o"></i> Yes, my day was pretty good</button> <button class="button" name="greeting" value="N"><i class="fa fa-frown-o"></i> No, it wasn\'t great</button></p>';
-				buf += '<h2>All teams <small style="font-weight: normal">(' + teams.length + ')</small></h2>';
+				//buf += '<h2>Hi</h2>';
+				//buf += '<p>Did you have a good day?</p>';
+				//buf += '<p><button class="button" name="greeting" value="Y"><i class="fa fa-smile-o"></i> Yes, my day was pretty good</button> <button class="button" name="greeting" value="N"><i class="fa fa-frown-o"></i> No, it wasn\'t great</button></p>';
+				buf += '<h2>All units <small style="font-weight: normal">(' + teams.length + ')</small></h2>';
 			} else {
 				if (this.curFolder.slice(-1) === '/') {
 					filterFolder = this.curFolder.slice(0, -1);
 					if (filterFolder) {
 						buf += '<h2><i class="fa fa-folder-open"></i> ' + filterFolder + ' <button class="button small" style="margin-left:5px" name="renameFolder"><i class="fa fa-pencil"></i> Rename</button> <button class="button small" style="margin-left:5px" name="promptDeleteFolder"><i class="fa fa-times"></i> Remove</button></h2>';
 					} else {
-						buf += '<h2><i class="fa fa-folder-open-o"></i> Teams not in any folders</h2>';
+						buf += '<h2><i class="fa fa-folder-open-o"></i> Units not in any folders</h2>';
 					}
 				} else {
 					filterFormat = this.curFolder;
@@ -367,29 +367,29 @@
 				}
 			}
 
-			var newTeamButtonText = "New Team";
-			if (filterFolder) newTeamButtonText = "New Team in folder";
+			var newTeamButtonText = "New Unit";
+			if (filterFolder) newTeamButtonText = "New Unit in folder";
 			if (filterFormat && filterFormat !== 'gen9') {
-				newTeamButtonText = "New " + BattleLog.escapeFormat(filterFormat) + " Team";
+				newTeamButtonText = "New " + BattleLog.escapeFormat(filterFormat) + " Unit";
 			}
 			buf += '<p><button name="newTop" value="team" class="button big"><i class="fa fa-plus-circle"></i> ' + newTeamButtonText + '</button> ' +
 				'<button name="newTop" value="box" class="button big"><i class="fa fa-archive"></i> New Box</button> ' +
-				'<input type="text" id="teamSearchBar" name="search" class="textbox searchinput" value="' + this.curSearchVal + '" placeholder="search teams"/></p>';
+				'<input type="text" id="teamSearchBar" name="search" class="textbox searchinput" value="' + this.curSearchVal + '" placeholder="search units"/></p>';
 
 			buf += '<ul class="teamlist">';
 			var atLeastOne = false;
 
 			try {
-				if (!window.localStorage && !window.nodewebkit) buf += '<li>== CAN\'T SAVE ==<br /><small>Your browser doesn\'t support <code>localStorage</code> and can\'t save teams! Update to a newer browser.</small></li>';
+				if (!window.localStorage && !window.nodewebkit) buf += '<li>== CAN\'T SAVE ==<br /><small>Your browser doesn\'t support <code>localStorage</code> and can\'t save units! Update to a newer browser.</small></li>';
 			} catch (e) {
-				buf += '<li>== CAN\'T SAVE ==<br /><small><code>Cookies</code> are disabled so you can\'t save teams! Enable them in your browser settings.</small></li>';
+				buf += '<li>== CAN\'T SAVE ==<br /><small><code>Cookies</code> are disabled so you can\'t save units! Enable them in your browser settings.</small></li>';
 			}
-			if (Storage.cantSave) buf += '<li>== CAN\'T SAVE ==<br /><small>You hit your browser\'s limit for team storage! Please backup them and delete some of them. Your teams won\'t be saved until you\'re under the limit again.</small></li>';
+			if (Storage.cantSave) buf += '<li>== CAN\'T SAVE ==<br /><small>You hit your browser\'s limit for unit storage! Please backup them and delete some of them. Your units won\'t be saved until you\'re under the limit again.</small></li>';
 			if (!teams.length) {
 				if (this.deletedTeamLoc >= 0) {
 					buf += '<li><button name="undoDelete"><i class="fa fa-undo"></i> Undo Delete</button></li>';
 				}
-				buf += '<li><p><em>you don\'t have any teams lol</em></p></li>';
+				buf += '<li><p><em>you don\'t have any units lol</em></p></li>';
 			} else {
 
 				for (var i = 0; i < teams.length + 1; i++) {
@@ -405,7 +405,7 @@
 						team = null;
 					}
 					if (!team) {
-						buf += '<li>Error: A corrupted team was dropped</li>';
+						buf += '<li>Error: A corrupted unit was dropped</li>';
 						teams.splice(i, 1);
 						i--;
 						if (this.deletedTeamLoc && this.deletedTeamLoc > i) this.deletedTeamLoc--;
@@ -448,14 +448,14 @@
 					if (team.capacity === 24) buf += ' pc-box';
 					buf += '" draggable="true">' + formatText + '<strong>' + BattleLog.escapeHTML(team.name) + '</strong><br /><small>';
 					buf += Storage.getTeamIcons(team);
-					buf += '</small></div><button name="edit" value="' + i + '"><i class="fa fa-pencil" aria-label="Edit" title="Edit (you can also just click on the team)"></i></button><button name="duplicate" value="' + i + '" title="Duplicate" aria-label="Duplicate"><i class="fa fa-clone"></i></button><button name="delete" value="' + i + '"><i class="fa fa-trash"></i> Delete</button></li>';
+					buf += '</small></div><button name="edit" value="' + i + '"><i class="fa fa-pencil" aria-label="Edit" title="Edit (you can also just click on the unit)"></i></button><button name="duplicate" value="' + i + '" title="Duplicate" aria-label="Duplicate"><i class="fa fa-clone"></i></button><button name="delete" value="' + i + '"><i class="fa fa-trash"></i> Delete</button></li>';
 
 				}
 				if (!atLeastOne) {
 					if (filterFolder) {
-						buf += '<li><p><em>you don\'t have any teams in this folder lol</em></p></li>';
+						buf += '<li><p><em>you don\'t have any units in this folder lol</em></p></li>';
 					} else {
-						buf += '<li><p><em>you don\'t have any ' + this.curFolder + ' teams lol</em></p></li>';
+						buf += '<li><p><em>you don\'t have any ' + this.curFolder + ' units lol</em></p></li>';
 					}
 				}
 			}
@@ -466,13 +466,13 @@
 			}
 
 			if (window.nodewebkit) {
-				buf += '<button name="revealFolder" class="button"><i class="fa fa-folder-open"></i> Reveal teams folder</button> <button name="reloadTeamsFolder" class="button"><i class="fa fa-refresh"></i> Reload teams files</button> <button name="backup" class="button"><i class="fa fa-upload"></i> Backup/Restore all teams</button>';
+				buf += '<button name="revealFolder" class="button"><i class="fa fa-folder-open"></i> Reveal units folder</button> <button name="reloadTeamsFolder" class="button"><i class="fa fa-refresh"></i> Reload units files</button> <button name="backup" class="button"><i class="fa fa-upload"></i> Backup/Restore all units</button>';
 			} else if (this.curFolder) {
-				buf += '<button name="backup" class="button"><i class="fa fa-upload"></i> Backup all teams from this folder</button>';
+				buf += '<button name="backup" class="button"><i class="fa fa-upload"></i> Backup all units from this folder</button>';
 			} else if (atLeastOne) {
-				buf += '<p><strong>Clearing your cookies (specifically, <code>localStorage</code>) will delete your teams.</strong> <span class="storage-warning">Browsers sometimes randomly clear cookies - you should back up your teams or use the desktop client if you want to make sure you don\'t lose them.</span></p>';
-				buf += '<button name="backup" class="button"><i class="fa fa-upload"></i> Backup/Restore all teams</button>';
-				buf += '<p>If you want to clear your cookies or <code>localStorage</code>, you can use the Backup/Restore feature to save your teams as text first.</p>';
+				buf += '<p><strong>Clearing your cookies (specifically, <code>localStorage</code>) will delete your units.</strong> <span class="storage-warning">Browsers sometimes randomly clear cookies - you should back up your units or use the desktop client if you want to make sure you don\'t lose them.</span></p>';
+				buf += '<button name="backup" class="button"><i class="fa fa-upload"></i> Backup/Restore all units</button>';
+				buf += '<p>If you want to clear your cookies or <code>localStorage</code>, you can use the Backup/Restore feature to save your units as text first.</p>';
 				var self = this;
 				if (navigator.storage && navigator.storage.persisted) {
 					navigator.storage.persisted().then(function (state) {
@@ -480,7 +480,7 @@
 					});
 				}
 			} else {
-				buf += '<button name="backup" class="button"><i class="fa fa-upload"></i> Restore teams from backup</button>';
+				buf += '<button name="backup" class="button"><i class="fa fa-upload"></i> Restore units from backup</button>';
 			}
 
 			var $pane = this.$('.teampane');
@@ -1141,7 +1141,7 @@
 					buf += ' <button name="validate" class="' + btnClass + '"><i class="fa fa-check"></i> Validate</button></li>';
 				}
 				if (!this.curSetList.length) {
-					buf += '<li><em>you have no pokemon lol</em></li>';
+					buf += '<li><em>you have no idols lol</em></li>';
 				}
 				for (i = 0; i < this.curSetList.length; i++) {
 					if (this.curSetList.length < this.curTeam.capacity && this.deletedSet && i === this.deletedSetLoc) {
@@ -1241,7 +1241,7 @@
 					}
 				}
 				if (this.curTeam.gen === 9) {
-					buf += '<span class="detailcell"><label>Tera Type</label>' + (set.teraType || species.types[0]) + '</span>';
+					buf += '<span class="detailcell"><label>Cinderella Type</label>' + (set.teraType || species.types[0]) + '</span>';
 				}
 			}
 			buf += '</button></div></div>';
@@ -2683,7 +2683,7 @@
 			}
 
 			if (this.curTeam.gen === 9) {
-				buf += '<div class="formrow"><label class="formlabel" title="Tera Type">Tera Type:</label><div><select name="teratype">';
+				buf += '<div class="formrow"><label class="formlabel" title="Cinderella Type">Tera Type:</label><div><select name="teratype">';
 				var types = Dex.types.all();
 				var teraType = set.teraType || species.types[0];
 				for (var i = 0; i < types.length; i++) {
@@ -2800,7 +2800,7 @@
 					}
 				}
 				if (this.curTeam.gen === 9) {
-					buf += '<span class="detailcell"><label>Tera Type</label>' + (set.teraType || species.types[0]) + '</span>';
+					buf += '<span class="detailcell"><label>Cinderella Type</label>' + (set.teraType || species.types[0]) + '</span>';
 				}
 			}
 			this.$('button[name=details]').html(buf);

@@ -365,7 +365,7 @@ class MainMenuPanel extends PSRoomPanel<MainMenuRoom> {
 						{this.renderSearchButton()}
 
 						<div class="menugroup">
-							<p><button class="mainmenu2 button" name="joinRoom" value="teambuilder">Teambuilder</button></p>
+							<p><button class="mainmenu2 button" name="joinRoom" value="teambuilder">Unitbuilder</button></p>
 							<p><button class={"mainmenu3" + onlineButton} name="joinRoom" value="ladder">Ladder</button></p>
 						</div>
 

@@ -83,7 +83,7 @@
 			case 'mainmenu':
 				return buf + '><i class="fa fa-home"></i> <span>Home</span></a></li>';
 			case 'teambuilder':
-				return buf + '><i class="fa fa-pencil-square-o"></i> <span>Teambuilder</span></a><button class="closebutton" name="closeRoom" value="' + 'teambuilder" aria-label="Close"><i class="fa fa-times-circle"></i></button></li>';
+				return buf + '><i class="fa fa-pencil-square-o"></i> <span>Unitbuilder</span></a><button class="closebutton" name="closeRoom" value="' + 'teambuilder" aria-label="Close"><i class="fa fa-times-circle"></i></button></li>';
 			case 'ladder':
 				return buf + '><i class="fa fa-list-ol"></i> <span>Ladder</span></a><button class="closebutton" name="closeRoom" value="' + 'ladder" aria-label="Close"><i class="fa fa-times-circle"></i></button></li>';
 			case 'battles':

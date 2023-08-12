@@ -51,7 +51,7 @@
 			}
 
 			buf += '<div class="menugroup">';
-			buf += '<p><button class="button mainmenu2" name="joinRoom" value="teambuilder">Teambuilder</button></p>';
+			buf += '<p><button class="button mainmenu2" name="joinRoom" value="teambuilder">Unitbuilder</button></p>';
 			buf += '<p><button class="button mainmenu3" name="joinRoom" value="ladder">Ladder</button></p>';
 			buf += '<p><button class="button mainmenu4" name="send" value="/smogtours">Tournaments</button></p>';
 			buf += '</div>';
@@ -303,8 +303,8 @@
 					group = '<small>' + BattleLog.escapeHTML(group) + '</small>';
 				}
 				var buf = '<div class="pm-window pm-window-' + userid + '" data-userid="' + userid + '" data-name="' + BattleLog.escapeHTML(name) + '">';
-				buf += '<h3><button class="closebutton" href="' + app.root + 'teambuilder" tabindex="-1" aria-label="Close"><i class="fa fa-times-circle"></i></button>';
-				buf += '<button class="minimizebutton" href="' + app.root + 'teambuilder" tabindex="-1" aria-label="Minimize"><i class="fa fa-minus-circle"></i></button>';
+				buf += '<h3><button class="closebutton" href="' + app.root + 'unitbuilder" tabindex="-1" aria-label="Close"><i class="fa fa-times-circle"></i></button>';
+				buf += '<button class="minimizebutton" href="' + app.root + 'unitbuilder" tabindex="-1" aria-label="Minimize"><i class="fa fa-minus-circle"></i></button>';
 				buf += group + BattleLog.escapeHTML(name.substr(1)) + '</h3>';
 				buf += '<div class="pm-log"><div class="pm-buttonbar"><button class="pm-challenge">Challenge</button><button class="pm-userOptions">...</button></div><div class="inner" role="log"></div></div>';
 				buf += '<div class="pm-log-add"><form class="chatbox nolabel"><textarea class="textbox" type="text" size="70" autocomplete="off" name="message"></textarea></form></div></div>';
@@ -913,7 +913,7 @@
 				var team = null;
 				if (Storage.teams[teamIndex]) team = Storage.teams[teamIndex];
 				if (format.indexOf('@@@') === -1 && !window.BattleFormats[format].team && !team) {
-					app.addPopupMessage("You need to go into the Teambuilder and build a team for this format.");
+					app.addPopupMessage("You need to go into the Unitbuilder and build a team for this format.");
 					return;
 				}
 				app.sendTeam(team);
@@ -940,7 +940,7 @@
 
 			// if it's a custom format, let the user figure it out
 			if (window.BattleFormats[format] && !window.BattleFormats[format].team && !team) {
-				app.addPopupMessage("You need to go into the Teambuilder and build a team for this format.");
+				app.addPopupMessage("You need to go into the Unitbuilder and build a team for this format.");
 				return;
 			}
 
@@ -1013,7 +1013,7 @@
 		curTeamIndex: 0,
 		renderTeams: function (formatid, teamIndex) {
 			if (Storage.whenTeamsLoaded.error) {
-				return '<button class="select teamselect" name="joinRoom" value="teambuilder"><em class="message-error">Error loading teams</em></button>';
+				return '<button class="select teamselect" name="joinRoom" value="teambuilder"><em class="message-error">Error loading units</em></button>';
 			}
 			if (!Storage.teams || !window.BattleFormats) {
 				return '<button class="select teamselect" name="team" disabled><em>Loading...</em></button>';
@@ -1080,7 +1080,7 @@
 				if (Storage.teams) {
 					app.addPopupMessage("Please select a team.");
 				} else {
-					app.addPopupMessage("You need to go into the Teambuilder and build a team for this format.");
+					app.addPopupMessage("You need to go into the Unitbuilder and build a team for this format.");
 				}
 				return;
 			}
@@ -1313,7 +1313,7 @@
 			this.teamFormat = teamFormat;
 			if (!teams.length) {
 				bufs[curBuf] = '<li><p><em>You have no teams</em></p></li>';
-				bufs[curBuf] += '<li><button name="teambuilder" class="button"><strong>Teambuilder</strong><br />' + BattleLog.escapeFormat(teamFormat) + ' teams</button></li>';
+				bufs[curBuf] += '<li><button name="teambuilder" class="button"><strong>Unitbuilder</strong><br />' + BattleLog.escapeFormat(teamFormat) + ' teams</button></li>';
 			} else {
 				var curTeam = (data.team === '' ? -1 : +data.team);
 				var count = 0;
@@ -1392,10 +1392,10 @@
 						}
 					}
 					if (!count) bufs[curBuf] += '<li><p><em>You have no ' + BattleLog.escapeFormat(teamFormat) + ' teams</em></p></li>';
-					bufs[curBuf] += '<li><button name="teambuilder" class="button"><strong>Teambuilder</strong><br />' + BattleLog.escapeFormat(teamFormat) + ' teams</button></li>';
+					bufs[curBuf] += '<li><button name="teambuilder" class="button"><strong>Unitbuilder</strong><br />' + BattleLog.escapeFormat(teamFormat) + ' teams</button></li>';
 					bufs[curBuf] += '<li><h3>Other teams</h3></li>';
 				} else {
-					bufs[curBuf] = '<li><button name="teambuilder" class="button"><strong>Teambuilder</strong></button></li>';
+					bufs[curBuf] = '<li><button name="teambuilder" class="button"><strong>Unitbuilder</strong></button></li>';
 					bufs[curBuf] += '<li><h3>All teams</h3></li>';
 					this.isMoreTeams = true;
 				}

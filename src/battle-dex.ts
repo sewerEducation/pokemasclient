@@ -804,7 +804,7 @@ const Dex = new class implements ModdedDex {
 		if (!pokemon) return '';
 		const data = this.getTeambuilderSpriteData(pokemon, gen);
 		const shiny = (data.shiny ? '-shiny' : '');
-    return 'background-image:url(sprites/idol/' + data.spriteid + shiny + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-repeat:no-repeat';
+    return 'background-image:url(sprites/idol/' + data.spriteid + shiny + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-size: 120px 120px;background-repeat:no-repeat';
 	}
 
 	getItemIcon(item: any) {
@@ -821,7 +821,7 @@ const Dex = new class implements ModdedDex {
 		type = this.types.get(type).name;
 		if (!type) type = '???';
 		let sanitizedType = type.replace(/\?/g, '%3f');
-		return `<img src="${Dex.resourcePrefix}sprites/types/${sanitizedType}.png" alt="${type}" height="14" width="32" class="pixelated${b ? ' b' : ''}" />`;
+		return `<img src="sprites/types/${sanitizedType}.png" alt="${type}" height="14" width="32" class="pixelated${b ? ' b' : ''}" />`;
 	}
 
 	getCategoryIcon(category: string | null) {
